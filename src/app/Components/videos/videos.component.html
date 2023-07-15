@@ -1,24 +1,66 @@
 <div class="conatainer row">
+  <div class="col-sm-4">
+    <router-outlet></router-outlet>
+  </div>
   <div class="col-sm-8">
-    <div class="d-flex justify-content-center"  *ngFor="let item of vidArray|paginate:{itemsPerPage:4,currentPage:p}">
-        <div class="card mb-3" style="max-width: 540px; max-height: 10em; min-height: 10em;" [routerLink]="['./vid',item.vid]"  >
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="{{item.thumbnailsrc}}" class="img-fluid rounded-start" alt="Card title">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{item.title}}</h5>
-                </div>
-              </div>
+    <div class="d-flex justify-content-center" *ngFor="let item of vidArray|paginate:{itemsPerPage:4,currentPage:p}">
+      <div class="card mb-3"
+       >
+        <div class="row g-0">
+          <div class="col-12 col-md-4">
+            <img src="{{item.thumbnailsrc}}" style="width:10em;height: 10em;" alt="Card title">
+          </div>
+          <div class="col-12 col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{item.title}}</h5>
+              <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalId" (click)="filter(item.vid)">Add to playlist</button>
+              <button class="ms-5  btn btn-outline-dark "  [routerLink]="['./vid',item.vid]"><em class="bi bi-play-btn"></em> Watch</button>
             </div>
           </div>
+        </div>
+      </div>
     </div>
-   <div class="d-flex justify-content-center">
-    <pagination-controls (pageChange)="p=$event"></pagination-controls>
-   </div>
+    <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="p=$event"></pagination-controls>
+    </div>
   </div>
-   <div class="col-sm-4">
-    <router-outlet></router-outlet>
-</div>
+  <!-- Modal Body -->
+  <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+  <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="" class="form-label">Playlist</label>
+              <select class="form-select form-select-lg" required [(ngModel)]="id" #select="ngModel" name="list" id="list">
+                <option selected>Select one</option>
+                <option *ngFor="let item of playlist" value="{{item.listId}}">{{item.name}}</option>
+              </select>
+              <div *ngIf="select.invalid && (select.dirty || select.touched)" class="alert">
+                <div class="text-danger " *ngIf="select.errors?.['required']">
+                    play list is required.
+                </div>
+            </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" [disabled]="select.invalid" (click)="Add()">Add to play list</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Optional: Place to the bottom of scripts -->
+  <script>
+    const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+  
+  </script>
 </div>

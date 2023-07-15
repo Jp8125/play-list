@@ -10,7 +10,9 @@ const routes: Routes = [
   { path: 'videos', component: VideosComponent ,children:[
     { path: 'vid/:id', component: PlayerComponent },
   ]},
-  { path: 'video/:id', component: FilterVideosComponent },
+  { path: 'palylist/:id', component: FilterVideosComponent,children:[
+    { path: 'video/:id', component: PlayerComponent },
+  ]},
   
 ];
 

@@ -13,12 +13,11 @@ export class FilterVideosComponent {
 constructor(private api:VideoService,private route:ActivatedRoute) {
   this.api.getallList().subscribe({
     next:(value)=>{
-        this.list=value
+        this.route.params.subscribe(res=>{
+          this.list=value.filter(obj=>obj.listId==res['id'])
+          console.log(this.list);
+         })
     },
-  })
-  this.route.params.subscribe(res=>{
-   console.log( res['id']);
-   
   })
 }
 }

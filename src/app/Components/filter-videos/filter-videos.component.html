@@ -1,1 +1,18 @@
-<p>filter-videos works!</p>
+<div class="conatiner">
+    <router-outlet></router-outlet>
+    <ng-container *ngIf="list.length!=0;else temp">
+        <div class="container   d-flex  justify-content-between flex flex-wrap  ">
+            <div class="card p-3 shadow " style="width: 14em;" *ngFor="let item of list" [routerLink]="['./video',item.vid]">
+                <img class="card-img-top" src="{{item.thumbnailsrc}}" alt="Title">
+                <div class="card-body">
+                    <h4 class="card-title">{{item.title}}</h4>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #temp>
+        <div class="text-center mt-5">
+            <h1>Oops No videos are available in this play list</h1>
+        </div>
+    </ng-template>
+</div>
