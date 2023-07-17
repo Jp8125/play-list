@@ -10,7 +10,7 @@ import { VideoService } from 'src/app/Services/video.service';
 })
 export class VideosComponent {
   vidArray:Playlist[]=[]
-  playlist:Array<Playlistmodel>=[]
+  playlist:Array<VideoModel>=[]
   p:number=1
   url:string=""
   id!:number
@@ -23,7 +23,7 @@ constructor(private vidoesapi:VideoService) {
 error:(err)=>{
     console.log(err.error);
 },})
-this.vidoesapi.getPlaylists().subscribe({
+this.vidoesapi.getVideos().subscribe({
   next:(value)=>{
       this.playlist=value
   },
