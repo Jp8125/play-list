@@ -4,6 +4,7 @@ import { PlayListsComponent } from './Components/play-lists/play-lists.component
 import { VideosComponent } from './Components/videos/videos.component';
 import { FilterVideosComponent } from './Components/filter-videos/filter-videos.component';
 import { PlayerComponent } from './Components/player/player.component';
+import { PlaybyCodeComponent } from './Components/playby-code/playby-code.component';
 
 const routes: Routes = [
   { path: 'play-lists', component: PlayListsComponent },
@@ -13,7 +14,7 @@ const routes: Routes = [
   { path: 'palylist/:id', component: FilterVideosComponent,children:[
     { path: 'video/:id', component: PlayerComponent },
   ]},
-  
+  { path: 'link', component: PlaybyCodeComponent },
 ];
 
 @NgModule({

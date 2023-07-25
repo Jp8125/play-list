@@ -11,6 +11,8 @@ import { PlayerComponent } from './Components/player/player.component';
 import {HttpClientModule} from '@angular/common/http'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { PlaybyCodeComponent } from './Components/playby-code/playby-code.component';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { FormsModule } from '@angular/forms';
     VideosComponent,
     FilterVideosComponent,
     NavbarComponent,
-    PlayerComponent
+    PlayerComponent,
+    PlaybyCodeComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
